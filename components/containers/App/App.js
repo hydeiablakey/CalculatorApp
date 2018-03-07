@@ -32,32 +32,24 @@ export default class App extends Component {
     // time that we've reached an operator in the same
     // sequence
 
-
     if ( App._operatorCount >  0) {
-      this._evaluate(); //Then log the result of the first operation, to get another operation. 
+      this._handleEvaluate(); //Then log the result of the first operation, to get another operation. 
     
     //currentNum is expecting a string because we don't parse until we hit the equal sign. 
     // But, we want to change the currentNumber into an int when a second operator is added or in other words
-    // when count is > 0. 
-      //console.log("State of currentNum: ", this.state.currentNum);
-
-      //Trying to change value which is the result of prev num and current num into a string from a number. 
-      //So that it will stop concatenating on the result and instead keep
-      //console.log("Result in string form: ", value.toString() ); 
-      // let z = parseInt(this.state.currentNum);
-      // console.log("Parsed number when count >=1: ", z);
-
+    // when count is >= 1. 
+      console.log("State of currentNum: ", this.state.currentNum);
     }
 
 
-    console.log("handleOperators",this.state, "\n operator count \n", _operatorCount);
+    console.log("handleOperators", this.state );
 
     App._operatorCount++;
   }
 
 
   //responsible for converting string currentNum and previousNum and providing operations.
-  _evaluate = () => {
+  _handleEvaluate = () => {
     let currentNumber = this.state.currentNum;
     let previousNumber = this.state.prevNum; 
     let x = parseInt(currentNumber);
@@ -92,12 +84,12 @@ export default class App extends Component {
 
   _handleNumbers = ( event ) => {
     const digit = event.target.value;
-
     this.setState({
       currentNum: this.state.currentNum + digit 
     });
 
-    console.log( "handleNumbers", this.state, "\n operator count \n", _operatorCount);
+    console.log("handleNumbers", this.state );
+
   }
 
 
@@ -115,12 +107,12 @@ export default class App extends Component {
   render() {
     return (
       <div className="container">
-        <Input currentNum={ this.state.currentNum } handleEqual={ this._handleEqualOperator } /> 
+        <Input currentNum={ this.state.currentNum }/> 
         <Buttons 
          handleOperators={ this._handleOperators } 
          handleNumbers={ this._handleNumbers } 
          handleClear={this._clearNumbers}
-         evaluate={this._evaluate} />
+         handleEvaluate={this._handleEvaluate} />
       </div>
     );
   }

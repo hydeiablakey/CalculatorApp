@@ -3,7 +3,7 @@ import './Buttons.less';
 
 export default class Buttons extends Component {
   render() {
-    let { handleOperators, handleNumbers, handleClear, evaluate } = this.props;
+    let { handleOperators, handleNumbers, handleClear, handleEvaluate } = this.props;
 
     return(
       <div className="buttonContainer ">
@@ -14,7 +14,7 @@ export default class Buttons extends Component {
 
 
 
-        <button className="operatorBtn" onClick={ evaluate } value="=">=</button>
+        <button className="operatorBtn" onClick={ handleEvaluate } value="=">=</button>
 
 
 
