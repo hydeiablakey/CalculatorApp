@@ -1,13 +1,120 @@
+
+
 #app {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font: 100 14px 'Roboto';
 }
 
+/* Container of all components */
 .container {
-	width: 200px;
-	height: 250px;
-	border: 1px solid;
+	width: 320px;
+	height: 520px;
 	padding: 0;
+	box-shadow: 0px 0px 20px 0px #AAA;
+	background-color: black;
 }
+
+/* Calculator Display */
+
+.display {
+	display: block;
+	height: 120px;
+  width: 100%;
+  padding: 10px;
+  text-align: right;
+  box-sizing: border-box;
+  background-color: #1C191C;
+  color: #FFF;
+  line-height: 130px;
+  font-size: 5em;
+}
+
+/* BUTTONS */
+
+button {
+
+	font-size: 20px;
+}
+
+.button {
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+}
+
+.buttonsContainer {
+
+	display: grid;
+	grid-auto-flow: dense;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-areas: 
+	"utility utility utility operator"
+	"number number number operator"
+	"number number number operator"
+	"number number number operator"
+	"number number number operator";
+	height: calc(100% - 120px)
+}
+
+.utilityBtn {
+	border-right: 1px solid #777;
+	border-top:1px solid #777;
+	background-color:#7FA7C7;
+	grid-area: utility;
+	grid-column: auto;
+}
+
+
+.operatorBtn {
+	border-right: 1px solid #777;
+	border-top:1px solid #777;
+	/*background: linear-gradient(to top, #4CBAFF 0%, #A2D6FF 100%)*/;
+
+	/*background-color:#6BBBD9;*/
+
+	grid-area: operator;
+	grid-column-start: 4;
+	grid-row: auto; 
+	padding: 5px;
+}
+#multiply {
+	background-color: #A2D6FF;
+}
+#subtract {
+background: linear-gradient(to top, #7AC7FF 0%, #A2D6FF 90%);
+
+}
+#plus {
+background: linear-gradient(to top, #63BAFF 40%, #7AC7FF 90%);
+}
+#divide {
+background: linear-gradient(to top, #4CBAFF 10%, #63BAFF 90%);
+}
+#equal {
+background-color: #4CBAFF;
+
+
+
+}
+
+.numberBtn {
+	border-right: 1px solid #777;
+	border-top:1px solid #777;
+
+	background-color:#96C5EB;
+	grid-area: number; 
+	grid-row: auto;
+	grid-column: auto;
+}
+
+.double {
+	width: 160px;
+	grid-column: span 2;
+
+}
+
+
