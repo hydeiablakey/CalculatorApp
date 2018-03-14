@@ -20,8 +20,8 @@
 /* Calculator Display */
 
 .display {
-	display: block;
-	height: 120px;
+display: block;
+height: 120px;
   width: 100%;
   padding: 10px;
   text-align: right;
@@ -35,8 +35,12 @@
 /* BUTTONS */
 
 button {
-
 	font-size: 20px;
+}
+
+button:hover {
+	background-color:#7FA7C7;
+
 }
 
 .button {
@@ -44,6 +48,7 @@ button {
 	width: 80px;
 	height: 80px;
 }
+
 
 .buttonsContainer {
 
@@ -68,38 +73,45 @@ button {
 	grid-column: auto;
 }
 
+.utilityBtn:hover {
+	background-color:#A2D6FF;
+
+}
+
 
 .operatorBtn {
 	border-right: 1px solid #777;
 	border-top:1px solid #777;
-	/*background: linear-gradient(to top, #4CBAFF 0%, #A2D6FF 100%)*/;
-
-	/*background-color:#6BBBD9;*/
-
 	grid-area: operator;
 	grid-column-start: 4;
 	grid-row: auto; 
 	padding: 5px;
 }
-#multiply {
-	background-color: #A2D6FF;
-}
-#subtract {
-background: linear-gradient(to top, #7AC7FF 0%, #A2D6FF 90%);
 
+.operatorBtn:hover {
+	background-color: #96C5EB;
 }
-#plus {
-background: linear-gradient(to top, #63BAFF 40%, #7AC7FF 90%);
-}
-#divide {
-background: linear-gradient(to top, #4CBAFF 10%, #63BAFF 90%);
-}
-#equal {
-background-color: #4CBAFF;
 
+/*
+ * Operator Buttons Gradient 
+ */
+	#multiply {
+		background-color: #A2D6FF;
+	}
+	#subtract {
+	background: linear-gradient(to top, #7AC7FF 0%, #A2D6FF 90%);
 
+	}
+	#plus {
+	background: linear-gradient(to top, #63BAFF 40%, #7AC7FF 90%);
+	}
+	#divide {
+	background: linear-gradient(to top, #4CBAFF 10%, #63BAFF 90%);
+	}
+	#equal {
+	background-color: #4CBAFF;
+	}
 
-}
 
 .numberBtn {
 	border-right: 1px solid #777;

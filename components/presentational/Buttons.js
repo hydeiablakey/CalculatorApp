@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class Buttons extends Component {
   render() {
-    let { handleOperators, handleNumbers, handleClear, handleEvaluate, handleUtility } = this.props;
+    let { handleOperators, handleNumbers, handleClear, handleEqual, handleUtility } = this.props;
 
     return(
 
@@ -17,7 +17,7 @@ export default class Buttons extends Component {
         <button id="plus" className="button operatorBtn" onClick={ handleOperators } value="+" >+</button>
         <button id="divide" className="button operatorBtn" onClick={ handleOperators } value="/">/</button>
 
-        <button id="equal" className="button operatorBtn" onClick={ handleEvaluate } value="=">=</button>
+        <button id="equal" className="button operatorBtn" onClick={ handleEqual } value="=">=</button>
 
         <button className="button numberBtn" onClick={ handleNumbers } value="9">9</button>
         <button className="button numberBtn" onClick={ handleNumbers } value="8">8</button>
