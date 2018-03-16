@@ -29,7 +29,7 @@ export default class Buttons extends Component {
         <button className="button numberBtn" onClick={ handleNumbers } value="2">2</button>
         <button className="button numberBtn" onClick={ handleNumbers } value="1">1</button>
         <button className="button numberBtn double" onClick={ handleNumbers } value="0">0</button>
-        <button className="button numberBtn" value=".">.</button>
+        <button className="button numberBtn" onClick={handleNumbers} value=".">.</button>
 
     </div>
     );
