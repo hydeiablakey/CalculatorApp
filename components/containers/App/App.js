@@ -36,7 +36,7 @@ export default class App extends Component {
       prevNum: this.state.currentNum,
       currentNum: "",
       currentOperation: valueOperator,
-      Display:""
+      Display: ""
     }); 
 
 
@@ -58,6 +58,7 @@ export default class App extends Component {
     const valueUtility = event.target.value;
 
     //this._handleEvaluate(); 
+
     if (valueUtility === "%") {
       let percents = parseInt(this.state.currentNum); 
       const percentSign = percents / 100; 
@@ -67,11 +68,17 @@ export default class App extends Component {
         currentNum: percentSign
 
       })
-      //must fix the clear button
 
-   } else if (valueUtility === "C") {
+
+
+      //MUST***** fix the clear button
+
+   } else if (valueUtility === "clear") {
       this.setState({
-        currentNum: "", 
+      prevNum: "",
+      currentNum: "",
+      currentOperation: null,
+      Display: ""
       });
 
     } else if (valueUtility === "plusMinus" ) {
@@ -79,7 +86,7 @@ export default class App extends Component {
     //soon add plus minus equation here. 
     }
   }
-  
+
 
 
 
@@ -88,14 +95,7 @@ export default class App extends Component {
     currentOperation: event.target.value
   });
 
-  console.log( "in handle equal", this.state.currentOperation );
-
-
-    //If it is the case that it is not even, then evaluate isEqual on the odd number. 
-
-    this._handleEvaluate(true)
-    
-  
+  this._handleEvaluate(true)
   //resetting operator count when equal sign is pressed. 
   App._operatorCount = 1; 
 
@@ -133,11 +133,11 @@ export default class App extends Component {
       value = y / x; 
       newVal = String(value);
     }
-
     
     console.log("In HandleEval, Current Num: " + currentNumber + " Previous Num: " + previousNumber );
     console.log("Int Result: ", value);
     console.log("String Result: ", newVal);
+
     if ( isEqual ) {
       this.setState({ 
         currentNum: newVal,
@@ -154,6 +154,7 @@ export default class App extends Component {
     console.log("IsEqual Value: ",isEqual);
 
   }
+
 
   //Handles numbers that have more than one digit. 
 
