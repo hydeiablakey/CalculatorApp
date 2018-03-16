@@ -56,22 +56,16 @@ export default class App extends Component {
 
    _handleUtility = (event) => {
     const valueUtility = event.target.value;
-
-    //this._handleEvaluate(); 
-
     if (valueUtility === "%") {
       let percents = parseInt(this.state.currentNum); 
       const percentSign = percents / 100; 
       console.log("The percent equivalent: " + percentSign);
 
       this.setState({
-        currentNum: percentSign
+        currentNum: percentSign,
+        Display: percentSign
 
       })
-
-
-
-      //MUST***** fix the clear button
 
    } else if (valueUtility === "clear") {
       this.setState({
@@ -82,6 +76,11 @@ export default class App extends Component {
       });
 
     } else if (valueUtility === "plusMinus" ) {
+      let plusMinus = this.state.currentNum *= -1; 
+      this.setState({
+        Display: plusMinus, 
+        currentNum: plusMinus
+      })
       console.log("You tried to use a negative sign or change to postive!");
     //soon add plus minus equation here. 
     }
@@ -95,7 +94,8 @@ export default class App extends Component {
     currentOperation: event.target.value
   });
 
-  this._handleEvaluate(true)
+  this._handleEvaluate(true);
+
   //resetting operator count when equal sign is pressed. 
   App._operatorCount = 1; 
 
@@ -110,40 +110,42 @@ export default class App extends Component {
   * 4. Clear out previousNum and currentOperation
   */
 
-  _handleEvaluate = (isEqual) => {
-
-    let currentNumber = parseInt(this.state.currentNum);
-    let previousNumber = parseInt(this.state.prevNum); 
+  _handleEvaluate = ( isEqual ) => {
+    //Changed to parseFloat so that when handling percents, it shows the value.  
+    let currentNumber = parseFloat(this.state.currentNum);
+    let previousNumber = parseFloat(this.state.prevNum);  // NaN
     let x = currentNumber;
     let y = previousNumber;
 
-    let value; 
-    let newVal;
+    let value = currentNumber;
 
     if (this.state.currentOperation === "+") {
       value = x + y;
-      newVal = String(value);
     } else if (this.state.currentOperation === "-") {
       value = y - x; 
-      newVal = String(value);
     } else if (this.state.currentOperation === "x") {
       value = x * y; 
-      newVal = String(value);
     } else if (this.state.currentOperation === "/") {
       value = y / x; 
-      newVal = String(value);
     }
-    
-    console.log("In HandleEval, Current Num: " + currentNumber + " Previous Num: " + previousNumber );
-    console.log("Int Result: ", value);
-    console.log("String Result: ", newVal);
 
+    let newVal = String(value);
+
+    console.log("Float Result: ", value);
+    console.log("String Result: ", newVal);
+    console.log("IsEqual Value: ",isEqual);
+
+    //isEqual is true when we press the equals button. 
     if ( isEqual ) {
       this.setState({ 
         currentNum: newVal,
         currentOperation: "",
         Display: newVal
+
       });
+
+      //isEqual is false when we are performing multiple operatons without pressing Equals right away. 
+    // I.e - 2+2+2 
     } else {
         this.setState({
         prevNum: newVal, //value
@@ -151,8 +153,6 @@ export default class App extends Component {
         Display: newVal,
       });
     }
-    console.log("IsEqual Value: ",isEqual);
-
   }
 
 
