@@ -42,6 +42,7 @@ export default class App extends Component {
     if ( App._operatorCount >  1 ) {
       this._handleEvaluate();
     }
+
       console.log("Current Number of Times a Operand was Pressed: ", App._operatorCount++);
   }
 
@@ -167,6 +168,7 @@ export default class App extends Component {
 
   _handleNumbers = ( event ) => {
     const digit = event.target.value;
+
     this.setState({
       currentNum: this.state.currentNum + digit,
       Display: this.state.currentNum + digit
@@ -181,7 +183,6 @@ export default class App extends Component {
         <Buttons 
          handleOperators={ this._handleOperators } 
          handleNumbers={ this._handleNumbers } 
-         handleClear={this._clearNumbers}
          handleEqual={this._handleEqual}
          handleUtility={this._handleUtility} />
          <div className='debug'>{ JSON.stringify( this.state, false, 2 ) }</div>
