@@ -18,16 +18,16 @@ export default class App extends Component {
 
 
  /*
-  * 1. Grabbing the operator
-  * 2. Moving currentNum to prevNum
-  * 3. Set currentOperation to operator
-  * 4. Check to see if this is the second or greater time
-  *    that we're using an operator in this sequence
+  * 1. Grabs the operator being pressed by the user. 
+  * 2. Sets the state and moves currentNum to prevNum.
+  * 3. Sets the operator being grabbed to the currentOperation. 
+  * 4. Display is being set to an empty string. 
+  * 5. Check the static variable _operatorCount to see if this is the second or greater time that
+  *    we are using an operator in this sequence. 
   *     a. If not, do nothing and continue
-  *     b. otherwise, evaluate with current currentNum, prevNum and 
-  *        currentOperation by calling the _handleEvaluate method like
-  *        if the equal button was pressed
-  * 5. Increment operator count
+  *     b. Otherwise, execute handleEvaluate and the else statement within handleEvaluate that sets 
+  *        prevNum and Display to newVal and currentNum to an empty string. 
+  * 6. Increment operator count
   */
 
   _handleOperators = ( event ) => {
@@ -39,19 +39,22 @@ export default class App extends Component {
       Display: ""
     }); 
 
-
     if ( App._operatorCount >  1 ) {
       this._handleEvaluate();
     }
-     console.log("Current Number of Times a Operand was Pressed: ", App._operatorCount++);
+      console.log("Current Number of Times a Operand was Pressed: ", App._operatorCount++);
   }
 
   /* This is the setup for all utility buttons: clear, percent and plus/minus. 
    * It is responsible for checking if valueUtility is equal to %, C or plusminus. 
    * 1. Set valueUtility to the event value of the button's that contain this method. 
-   * 2. Check if valueUtility is equal to %, if it is then divide the currentNumber by 100. 
-   * 3. If it is not equal to %, check if it is equal to "C", if it is, then set the state.
-   * 4. If 
+   * 2. Check if valueUtility is equal to %, if it is then divide the currentNumber by 100.
+   *    and set currentNum and displayNum to percentSign. If it is not equal to %, check if 
+   *    it is equal to "C"
+   * 3. If valueUtility is equal to "C", set the state to it's default values for each prop.
+   *    If it is not equal to "C", check if it is equal to "plusMinus"
+   * 4. If valueUtility not equal to % or C, check if it is equal to "plusMinus", if it is, 
+   *    then multiply currentNum by -1 and set props Display and currentNum to the value of plusMinus. 
    */
 
    _handleUtility = (event) => {
@@ -64,30 +67,31 @@ export default class App extends Component {
       this.setState({
         currentNum: percentSign,
         Display: percentSign
-
-      })
+      });
 
    } else if (valueUtility === "clear") {
       this.setState({
-      prevNum: "",
-      currentNum: "",
-      currentOperation: null,
-      Display: ""
+        prevNum: "",
+        currentNum: "",
+        currentOperation: null,
+        Display: ""
       });
 
-    } else if (valueUtility === "plusMinus" ) {
+  } else if (valueUtility === "plusMinus" ) {
       let plusMinus = this.state.currentNum *= -1; 
       this.setState({
         Display: plusMinus, 
         currentNum: plusMinus
-      })
-      console.log("You tried to use a negative sign or change to postive!");
-    //soon add plus minus equation here. 
+      });
     }
   }
 
-
-
+  /*
+   * 1. HandleEqual looks for when the equal sign is pressed and sets currentOperation to that value. 
+   * 2. When HandleEqual is called, it calls the function handleEvaluate and passes the boolean 
+   *    value of true to the handler.
+   * 3. HandleEqual also sets the static variable operatorCount back to it's default value of 1.
+   */
 
  _handleEqual = (event) => {
   this.setState({ 
@@ -95,30 +99,30 @@ export default class App extends Component {
   });
 
   this._handleEvaluate(true);
-
-  //resetting operator count when equal sign is pressed. 
   App._operatorCount = 1; 
 
  }
 
  /*
-  * 1. Get currentNum, prevNum and currentOperation from state if it's avilable(non-empty string)
+  * 1. Get currentNum, prevNum and currentOperation from state if it's avaliable(non-empty string)
   *    a. if they're available, continue
-  *    b. otherwise, we cant evaluate, so return(and maybe log an error)
-  * 2. Check the operator, and execute the operation
-  * 3. Set currentNum to new value
-  * 4. Clear out previousNum and currentOperation
+  *    b. otherwise, we cant evaluate, so return the currentNumber. 
+  * 2. Set value(the result of the operation) to currentNumber. 
+  * 3. Set value to newVal which converts value back into a String for handling more operations. 
+  * 3. Clear out currentOperation and set currentNum and Display to the newVal. 
+  * 4. If there are more operations with more than two numbers, change the state properties prevNum
+  *    and Display to the newVal and set currentNum to an empty string because it is waiting for 
+  *    another number to be entered. 
   */
 
   _handleEvaluate = ( isEqual ) => {
     //Changed to parseFloat so that when handling percents, it shows the value.  
     let currentNumber = parseFloat(this.state.currentNum);
-    let previousNumber = parseFloat(this.state.prevNum);  // NaN
+    let previousNumber = parseFloat(this.state.prevNum); 
     let x = currentNumber;
     let y = previousNumber;
 
     let value = currentNumber;
-
     if (this.state.currentOperation === "+") {
       value = x + y;
     } else if (this.state.currentOperation === "-") {
@@ -141,10 +145,9 @@ export default class App extends Component {
         currentNum: newVal,
         currentOperation: "",
         Display: newVal
+    });
 
-      });
-
-      //isEqual is false when we are performing multiple operatons without pressing Equals right away. 
+    //isEqual is false when we are performing multiple operatons without pressing Equals right away. 
     // I.e - 2+2+2 
     } else {
         this.setState({
@@ -156,7 +159,11 @@ export default class App extends Component {
   }
 
 
-  //Handles numbers that have more than one digit. 
+  // Handles numbers that have more than one digit. 
+  /* 1. The variable digit checks for when a number is being pressed. 
+   * 2. The state sets currentNum to the state of currentNum which is the value being entered and concates
+   *    digit for values larger than 1 digit. 
+   */
 
   _handleNumbers = ( event ) => {
     const digit = event.target.value;
@@ -164,9 +171,7 @@ export default class App extends Component {
       currentNum: this.state.currentNum + digit,
       Display: this.state.currentNum + digit
     });
-
     console.log("handleNumbers", this.state );
-
   }
 
   render() {
