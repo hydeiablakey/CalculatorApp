@@ -43,7 +43,7 @@ export default class App extends Component {
     if ( App._operatorCount >  1 ) {
       this._handleEvaluate();
     }
-     console.log("Current Number of Times a Operand was Pressed: ", App._operatorCount++);
+    App._operatorCount++
   }
 
   /* This is the setup for all utility buttons: clear, percent and plus/minus. 
@@ -61,7 +61,7 @@ export default class App extends Component {
     if (valueUtility === "%") {
       let percents = parseInt(this.state.currentNum); 
       const percentSign = percents / 100; 
-      console.log("The percent equivalent: " + percentSign);
+
 
       this.setState({
         currentNum: percentSign
@@ -88,14 +88,7 @@ export default class App extends Component {
     currentOperation: event.target.value
   });
 
-  console.log( "in handle equal", this.state.currentOperation );
-
-
-    //If it is the case that it is not even, then evaluate isEqual on the odd number. 
-
-    this._handleEvaluate(true)
-    
-  
+  this._handleEvaluate(true)
   //resetting operator count when equal sign is pressed. 
   App._operatorCount = 1; 
 
@@ -135,9 +128,7 @@ export default class App extends Component {
     }
 
     
-    console.log("In HandleEval, Current Num: " + currentNumber + " Previous Num: " + previousNumber );
-    console.log("Int Result: ", value);
-    console.log("String Result: ", newVal);
+  
     if ( isEqual ) {
       this.setState({ 
         currentNum: newVal,
@@ -151,7 +142,6 @@ export default class App extends Component {
         Display: newVal,
       });
     }
-    console.log("IsEqual Value: ",isEqual);
 
   }
 
@@ -163,8 +153,6 @@ export default class App extends Component {
       currentNum: this.state.currentNum + digit,
       Display: this.state.currentNum + digit
     });
-
-    console.log("handleNumbers", this.state );
 
   }
 
@@ -178,7 +166,7 @@ export default class App extends Component {
          handleClear={this._clearNumbers}
          handleEqual={this._handleEqual}
          handleUtility={this._handleUtility} />
-         <div className='debug'>{ JSON.stringify( this.state, false, 2 ) }</div>
+
       </div>
     );
   }
