@@ -81,8 +81,7 @@ export default class App extends Component {
         Display: plusMinus, 
         currentNum: plusMinus
       })
-      console.log("You tried to use a negative sign or change to postive!");
-    //soon add plus minus equation here. 
+
     }
   }
 
@@ -130,10 +129,6 @@ export default class App extends Component {
     }
 
     let newVal = String(value);
-
-    console.log("Float Result: ", value);
-    console.log("String Result: ", newVal);
-    console.log("IsEqual Value: ",isEqual);
 
     //isEqual is true when we press the equals button. 
     if ( isEqual ) {
