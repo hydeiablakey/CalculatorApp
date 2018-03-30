@@ -11,19 +11,19 @@ Getting Started
 -------
 To get started with this app, you can start by cloning `Calculator App`. 
 
-**After cloning, cd into the associated Calculator App folder:**
+After cloning, cd into the associated Calculator App folder:
 
 ```
 cd calculator
 ```
 
-**Install the Dependencies:** 
+Install the Dependencies:
 
 ```
 npm install or npm i
 ```
 
-**Begin Running the Application:**
+Begin Running the Application:
 ```
 npm run dev 
 ```
