@@ -139,7 +139,7 @@ export default class App extends Component {
 
       });
 
-      //isEqual is false when we are performing multiple operatons without pressing Equals right away. 
+    //isEqual is false when we are performing multiple operatons without pressing Equals right away. 
     // I.e - 2+2+2 
     } else {
         this.setState({
